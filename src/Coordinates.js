@@ -1,8 +1,8 @@
 "use strict";
 
 Lyngk.Coordinates = function (c, l) {
-    var ligne = l;
     var col = c;
+    var ligne = l;
 
     var tab = ['A3'
         ,'B2','B3','B4','B5'
@@ -16,6 +16,12 @@ Lyngk.Coordinates = function (c, l) {
 
     this.isValid = function (){
         return tab.indexOf(col + ligne) != -1;
+    };
+
+    this.clone = function(){
+        var coord = new Lyngk.Coordinates(col,ligne);
+
+        return coord;
     };
 
     this.toString = function(){
