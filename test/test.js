@@ -96,6 +96,7 @@ LyngkTestCase.prototype.test5PiecesIntersection = function()
 LyngkTestCase.prototype.testInitPlateau = function()
 {
     var engine = new Lyngk.Engine();
+    engine.initOnePiece();
 
-    assertTrue(engine.isCorrectlyInitialized());
+    assertTrue(engine.checkInitOnePiece());
 };
