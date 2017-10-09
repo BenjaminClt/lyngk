@@ -11,8 +11,12 @@ Lyngk.Intersection = function (c) {
     };
 
     this.setPiece = function(p){
+        if (piece != null)
+            state = Lyngk.State.STACK;
+        else
+            state = Lyngk.State.ONE_PIECE;
+
         piece = p;
-        state = Lyngk.State.ONE_PIECE;
     };
 
     this.getColor = function(){
