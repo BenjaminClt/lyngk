@@ -24,6 +24,11 @@ Lyngk.Coordinates = function (c, l) {
         return coord;
     };
 
+    this.hash = function(){
+
+        return col.charCodeAt(0) * 10 + ligne;
+    };
+
     this.toString = function(){
         if (this.isValid())
             return col + ligne;
