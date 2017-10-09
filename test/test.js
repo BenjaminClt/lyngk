@@ -88,7 +88,14 @@ LyngkTestCase.prototype.test5PiecesIntersection = function()
     testInter.setPiece(new Lyngk.Piece(Lyngk.Color.RED));
     testInter.setPiece(new Lyngk.Piece(Lyngk.Color.RED));
     testInter.setPiece(new Lyngk.Piece(Lyngk.Color.RED));
-    testInter.setPiece(new Lyngk.Piece(Lyngk.Color.RED));
+    testInter.setPiece(new Lyngk.Piece(Lyngk.Color.BLACK));
 
     assertEquals(testInter.getState(), Lyngk.State.FULL_STACK);
+};
+
+LyngkTestCase.prototype.testInitPlateau = function()
+{
+    var engine = new Lyngk.Engine();
+
+    assertTrue(engine.isCorrectlyInitialized());
 };
