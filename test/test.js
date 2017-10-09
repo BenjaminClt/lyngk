@@ -54,3 +54,10 @@ LyngkTestCase.prototype.testCoordinateHash = function(){
 
     assertEquals(testCoord.hash(), 653);
 };
+
+LyngkTestCase.prototype.testIntersectionDefaultState = function()
+{
+    var testInter = new Lyngk.Intersection(653);
+
+    assertEquals(testInter.getState(), Lyngk.State.VACANT);
+};
