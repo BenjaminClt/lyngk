@@ -80,3 +80,15 @@ LyngkTestCase.prototype.testRedBlueIntersection = function()
     assertEquals(testInter.getState(), Lyngk.State.STACK);
     assertEquals(testInter.getColor(), Lyngk.Color.RED);
 };
+
+LyngkTestCase.prototype.test5PiecesIntersection = function()
+{
+    var testInter = new Lyngk.Intersection(653);
+    testInter.setPiece(new Lyngk.Piece(Lyngk.Color.BLUE));
+    testInter.setPiece(new Lyngk.Piece(Lyngk.Color.RED));
+    testInter.setPiece(new Lyngk.Piece(Lyngk.Color.RED));
+    testInter.setPiece(new Lyngk.Piece(Lyngk.Color.RED));
+    testInter.setPiece(new Lyngk.Piece(Lyngk.Color.RED));
+
+    assertEquals(testInter.getState(), Lyngk.State.FULL_STACK);
+};
