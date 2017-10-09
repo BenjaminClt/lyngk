@@ -26,3 +26,10 @@ LyngkTestCase.prototype.test43ValidCoordinate = function()
 
     assertEquals(count, 43);
 };
+
+LyngkTestCase.prototype.testStringCoordinate = function()
+{
+    var testCoord = new Lyngk.Coordinates('A', 3);
+
+    assertEquals(testCoord.toString(), "A3");
+};
