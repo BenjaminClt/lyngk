@@ -10,6 +10,10 @@ Lyngk.Intersection = function (c) {
         return state;
     };
 
+    this.getPieces = function(){
+        return pieces;
+    };
+
     this.setPiece = function(p){
         pieces.push(p);
         if (pieces.length == 1)
