@@ -40,3 +40,11 @@ LyngkTestCase.prototype.testStringInvalidCoordinate = function()
 
     assertEquals(testCoord.toString(), "invalid");
 };
+
+LyngkTestCase.prototype.testCloneCoordinate = function()
+{
+    var testCoord1 = new Lyngk.Coordinates('A', 3);
+    var testCoord2 = testCoord1.clone();
+
+    assertEquals(testCoord1.toString(), testCoord2.toString());
+}
