@@ -11,13 +11,18 @@ Lyngk.Engine = function () {
 
         for (var i = 0; i < size; i++)
         {
-            var inter = new Lyngk.Intersection(653);
-            inter.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-            intersections.push(inter);
+            intersections.push(new Lyngk.Intersection(653));
         }
     };
 
-    this.isCorrectlyInitialized = function()
+    this.initOnePiece = function(){
+        for (var i = 0; i < intersections.length; i++)
+        {
+            intersections[i].setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+        }
+    };
+
+    this.checkInitOnePiece = function()
     {
         if (intersections.length != Lyngk.AllCoordinates.length)
             return false;
@@ -29,6 +34,7 @@ Lyngk.Engine = function () {
         }
 
         return true;
+
     };
 
     init();
