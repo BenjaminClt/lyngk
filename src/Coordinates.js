@@ -22,6 +22,6 @@ Lyngk.Coordinates = function (c, l) {
         if (this.isValid())
             return col + ligne;
         else
-            return "invalid coordinate";
+            return "invalid";
     }
 };
