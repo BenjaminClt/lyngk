@@ -13,8 +13,15 @@ Lyngk.Coordinates = function (c, l) {
         ,'G3','G4','G5','G6','G7','G8','G9'
         ,'H5','H6','H7','H8'
         ,'I7'];
-    
+
     this.isValid = function (){
         return tab.indexOf(col + ligne) != -1;
     };
+
+    this.toString = function(){
+        if (this.isValid())
+            return col + ligne;
+        else
+            return "invalid coordinate";
+    }
 };
