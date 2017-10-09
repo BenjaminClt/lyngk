@@ -47,4 +47,10 @@ LyngkTestCase.prototype.testCloneCoordinate = function()
     var testCoord2 = testCoord1.clone();
 
     assertEquals(testCoord1.toString(), testCoord2.toString());
-}
+};
+
+LyngkTestCase.prototype.testCoordinateHash = function(){
+    var testCoord = new Lyngk.Coordinates('A', 3);
+
+    assertEquals(testCoord.hash(), 653);
+};
