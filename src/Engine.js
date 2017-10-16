@@ -23,17 +23,16 @@ Lyngk.Engine = function () {
     };
 
     this.initEightPieces = function(){
-        for (var i = 0; i < intersections.length; i++)
-        {
-            var colors = [5, 5, 5, 0, 1, 2, 3, 4];
+        var countColors = [8,8,8,8,8,3];
+        for (var i = 0; i < intersections.length; i++) {
 
-            for (var j = 0; j < 8; j++)
-            {
-                var rand = Math.floor(Math.random() * (colors.length - 1));
-                intersections[i].setPiece(new Lyngk.Piece(colors[rand]));
+            var randomColor;
+            do{
+                randomColor = Math.floor(Math.random() * 6);
+            }while(countColors[randomColor] <= 0)
+            countColors[randomColor]--;
 
-                colors.splice(rand, 1);
-            }
+            intersections[i].setPiece(new Lyngk.Piece(randomColor));
         }
     };
 
@@ -57,36 +56,24 @@ Lyngk.Engine = function () {
         if (intersections.length != Lyngk.AllCoordinates.length)
             return false;
 
+        var countColors = [0, 0, 0, 0, 0, 0];
+
         for (var i = 0; i < intersections.length; i++)
         {
-            var countColors = [0, 0, 0, 0, 0, 0];
-
-            var pieces = intersections[i].getPieces();
-
-            if (pieces.length !== 8)
-                return false;
-
-            for (var j = 0; j < 8; j++)
-            {
-                countColors[pieces[j].getColor()]++;
-            }
-
-            for (var j = 0; j < 6; j++)
-            {
-                if (countColors[i] > 1 && i !== 5)
-                {
-                    return false;
-                }
-
-                if (countColors[i] !== 3 && i === 5)
-                {
-                    return false;
-                }
-            }
+            countColors[intersections[i].getColor()]++;
         }
 
-        return true;
+        var valid = true;
+        for(var i = 0; i < 6; i++)
+        {
+            if(i <= 4 && countColors[i] != 8)
+                valid = false;
 
+            else if(i == 5 && countColors[i] != 3)
+                valid = false;
+        }
+
+        return valid;
     };
 
     init();
