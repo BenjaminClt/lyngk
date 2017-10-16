@@ -15,66 +15,16 @@ Lyngk.Engine = function () {
         }
     };
 
-    this.initOnePiece = function(){
-        for (var i = 0; i < intersections.length; i++)
-        {
-            intersections[i].setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-        }
+    this.setPiece = function(i, p){
+        intersections[i].setPiece(p);
     };
 
-    this.initEightPieces = function(){
-        var countColors = [8,8,8,8,8,3];
-        for (var i = 0; i < intersections.length; i++) {
+    this.getIntersection = function (i) {
+        if (i >= 0 && i < 43)
+            return intersections[i];
 
-            var randomColor;
-            do{
-                randomColor = Math.floor(Math.random() * 6);
-            }while(countColors[randomColor] <= 0)
-            countColors[randomColor]--;
-
-            intersections[i].setPiece(new Lyngk.Piece(randomColor));
-        }
-    };
-
-    this.checkInitOnePiece = function()
-    {
-        if (intersections.length != Lyngk.AllCoordinates.length)
-            return false;
-
-        for (var i = 0; i < intersections.length; i++)
-        {
-            if (intersections[i].getState() !== Lyngk.State.ONE_PIECE)
-                return false;
-        }
-
-        return true;
-
-    };
-
-    this.checkInitEightPieces = function()
-    {
-        if (intersections.length != Lyngk.AllCoordinates.length)
-            return false;
-
-        var countColors = [0, 0, 0, 0, 0, 0];
-
-        for (var i = 0; i < intersections.length; i++)
-        {
-            countColors[intersections[i].getColor()]++;
-        }
-
-        var valid = true;
-        for(var i = 0; i < 6; i++)
-        {
-            if(i <= 4 && countColors[i] != 8)
-                valid = false;
-
-            else if(i == 5 && countColors[i] != 3)
-                valid = false;
-        }
-
-        return valid;
-    };
+        return null;
+    }
 
     init();
 };
