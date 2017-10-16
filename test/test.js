@@ -144,5 +144,5 @@ LyngkTestCase.prototype.testInitEightPiece = function()
             valid = false;
     }
 
-    return valid;
+    assert(valid);
 };
