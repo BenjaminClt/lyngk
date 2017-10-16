@@ -96,15 +96,17 @@ LyngkTestCase.prototype.test5PiecesIntersection = function()
 LyngkTestCase.prototype.testInitOnePiece = function()
 {
     var engine = new Lyngk.Engine();
+    var intersections = engine.getIntersections();
+
     for (var i = 0; i < 43; i++)
     {
-        engine.setPiece(i, new Lyngk.Piece(Lyngk.Color.WHITE));
+        intersections[i].setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
     }
 
     var valid = true;
     for (var i = 0; i < 43; i++)
     {
-        if (engine.getIntersection(i).getState() !== Lyngk.State.ONE_PIECE)
+        if (intersections[i].getState() !== Lyngk.State.ONE_PIECE)
             valid = false;
     }
 
@@ -116,20 +118,22 @@ LyngkTestCase.prototype.testInitEightPiece = function()
     var engine = new Lyngk.Engine();
     engine.initStart();
 
+    var intersections = engine.getIntersections();
+
     var countColors2 = [0, 0, 0, 0, 0, 0];
 
     for (var i = 0; i < 43; i++)
     {
-        countColors2[engine.getIntersection(i).getColor()]++;
+        countColors2[intersections[i].getColor()]++;
     }
 
     var valid = true;
     for(var i = 0; i < 6; i++)
     {
-        if(i <= 4 && countColors2[i] != 8)
+        if(i <= 4 && countColors2[i] !== 8)
             valid = false;
 
-        else if(i == 5 && countColors2[i] != 3)
+        else if(i === 5 && countColors2[i] !== 3)
             valid = false;
     }
 
@@ -141,10 +145,12 @@ LyngkTestCase.prototype.testStackHeight = function()
     var engine = new Lyngk.Engine();
     engine.initStart();
 
+    var intersections = engine.getIntersections();
+
     var valid = true;
     for(var i = 0; i < 43; i++)
     {
-        if (engine.getIntersection(i).getStackHeight() !== 1)
+        if (intersections[i].getStackHeight() !== 1)
             valid = false;
     }
 
@@ -154,10 +160,27 @@ LyngkTestCase.prototype.testStackHeight = function()
 LyngkTestCase.prototype.testStackColor = function()
 {
     var engine = new Lyngk.Engine();
+    var inter = engine.getIntersection("A3");
 
-    engine.setPiece(10, new Lyngk.Piece(Lyngk.Color.WHITE));
-    engine.setPiece(10, new Lyngk.Piece(Lyngk.Color.BLACK));
-    engine.setPiece(10, new Lyngk.Piece(Lyngk.Color.BLUE));
+    inter.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+    inter.setPiece(new Lyngk.Piece(Lyngk.Color.BLACK));
+    inter.setPiece(new Lyngk.Piece(Lyngk.Color.BLUE));
 
-    assertEquals(engine.getIntersection(10).getColor(), Lyngk.Color.BLUE);
+    assertEquals(inter.getColor(), Lyngk.Color.BLUE);
+};
+
+LyngkTestCase.prototype.testMovePiece = function()
+{
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var interA3 = engine.getIntersection("A3");
+    var interB3 = engine.getIntersection("B3");
+
+    var colorA3 = interA3.getColor();
+
+    engine.move(interA3, interB3);
+
+    assertEquals(interB3.getColor(), colorA3);
+    assertEquals(interA3.getStackHeight(), 0);
 };
