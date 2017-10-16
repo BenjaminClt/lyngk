@@ -150,3 +150,14 @@ LyngkTestCase.prototype.testStackHeight = function()
 
     assert(valid);
 };
+
+LyngkTestCase.prototype.testStackColor = function()
+{
+    var engine = new Lyngk.Engine();
+
+    engine.setPiece(10, new Lyngk.Piece(Lyngk.Color.WHITE));
+    engine.setPiece(10, new Lyngk.Piece(Lyngk.Color.BLACK));
+    engine.setPiece(10, new Lyngk.Piece(Lyngk.Color.BLUE));
+
+    assertEquals(engine.getIntersection(10).getColor(), Lyngk.Color.BLUE);
+};
