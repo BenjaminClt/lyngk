@@ -36,9 +36,12 @@ Lyngk.Engine = function () {
     };
 
     this.move = function (inter1, inter2) {
-        var piece = inter1.takePiece();
+        var pieces = inter1.takePieces();
 
-        inter2.setPiece(piece);
+        for (var i = 0; i < pieces.length; i++)
+        {
+            inter2.setPiece(pieces[i]);
+        }
     };
 
     this.initStart = function(){

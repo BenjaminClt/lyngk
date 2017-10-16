@@ -25,7 +25,6 @@ Lyngk.Coordinates = function (c, l) {
     };
 
     this.hash = function(){
-
         return col.charCodeAt(0) * 10 + ligne;
     };
 

@@ -5,13 +5,27 @@ Lyngk.State = {VACANT: 0, ONE_PIECE: 1, STACK: 2, FULL_STACK: 3};
 Lyngk.Intersection = function (c) {
     var state = Lyngk.State.VACANT;
     var pieces = [];
+    var coordinate = c;
 
     this.getState = function(){
         return state;
     };
 
-    this.getPieces = function(){
-        return pieces;
+    this.takePieces = function () {
+        var tmpPieces = pieces;
+        pieces = [];
+
+        return tmpPieces;
+
+        return null;
+    };
+
+    this.getCoordinate = function () {
+        return coordinate;
+    };
+
+    this.getStackHeight = function(){
+        return pieces.length;
     };
 
     this.setPiece = function(p){
