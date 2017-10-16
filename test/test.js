@@ -114,18 +114,7 @@ LyngkTestCase.prototype.testInitOnePiece = function()
 LyngkTestCase.prototype.testInitEightPiece = function()
 {
     var engine = new Lyngk.Engine();
-
-    var countColors1 = [8,8,8,8,8,3];
-    for (var i = 0; i < 43; i++) {
-
-        var randomColor;
-        do{
-            randomColor = Math.floor(Math.random() * 6);
-        }while(countColors1[randomColor] <= 0)
-        countColors1[randomColor]--;
-
-        engine.setPiece(i, new Lyngk.Piece(randomColor));
-    }
+    engine.initStart();
 
     var countColors2 = [0, 0, 0, 0, 0, 0];
 
@@ -141,6 +130,21 @@ LyngkTestCase.prototype.testInitEightPiece = function()
             valid = false;
 
         else if(i == 5 && countColors2[i] != 3)
+            valid = false;
+    }
+
+    assert(valid);
+};
+
+LyngkTestCase.prototype.testStackHeight = function()
+{
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var valid = true;
+    for(var i = 0; i < 43; i++)
+    {
+        if (engine.getIntersection(i).getStackHeight() !== 1)
             valid = false;
     }
 
