@@ -7,24 +7,57 @@ Lyngk.Engine = function () {
     var intersections = [];
 
     var init = function(){
-        var size = Lyngk.AllCoordinates.length;
+        var letters = "ABCDEFGHI";
 
-        for (var i = 0; i < size; i++)
+        for (var i = 0; i < letters.length; i++)
         {
-            intersections.push(new Lyngk.Intersection(653));
+            for (var j = 1; j < 10; j++)
+            {
+                var coord = new Lyngk.Coordinates(letters[i], j);
+
+                if (coord.isValid())
+                    intersections.push(new Lyngk.Intersection(coord));
+            }
         }
     };
 
-    this.setPiece = function(i, p){
-        intersections[i].setPiece(p);
+    this.getIntersections = function () {
+        return intersections;
     };
 
-    this.getIntersection = function (i) {
-        if (i >= 0 && i < 43)
-            return intersections[i];
+    this.getIntersection = function (c) {
+        for (var i = 0; i < intersections.length; i++)
+        {
+            if (intersections[i].getCoordinate().toString() === c)
+                return intersections[i];
+        }
 
         return null;
-    }
+    };
+
+    this.move = function (inter1, inter2) {
+        var piece = inter1.takePiece();
+
+        inter2.setPiece(piece);
+    };
+
+    this.initStart = function(){
+
+        for (var i = 0; i < 43; i++)
+        {
+            var countColors1 = [8,8,8,8,8,3];
+            for (var i = 0; i < 43; i++) {
+
+                var randomColor;
+                do{
+                    randomColor = Math.floor(Math.random() * 6);
+                }while(countColors1[randomColor] <= 0)
+                countColors1[randomColor]--;
+
+                intersections[i].setPiece(new Lyngk.Piece(randomColor));
+            }
+        }
+    };
 
     init();
 };
