@@ -96,15 +96,17 @@ LyngkTestCase.prototype.test5PiecesIntersection = function()
 LyngkTestCase.prototype.testInitOnePiece = function()
 {
     var engine = new Lyngk.Engine();
-    engine.initOnePiece();
+    for (var i = 0; i < 43; i++)
+    {
+        engine.setPiece(i, new Lyngk.Piece(Lyngk.Color.WHITE));
+    }
 
-    assertTrue(engine.checkInitOnePiece());
-};
+    var valid = true;
+    for (var i = 0; i < 43; i++)
+    {
+        if (engine.getIntersection(i).getState() !== Lyngk.State.ONE_PIECE)
+            valid = false;
+    }
 
-LyngkTestCase.prototype.testInitEightPiece = function()
-{
-    var engine = new Lyngk.Engine();
-    engine.initEightPieces();
-
-    assertTrue(engine.checkInitEightPieces());
+    assertTrue(valid);
 };
