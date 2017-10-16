@@ -202,3 +202,24 @@ LyngkTestCase.prototype.testMoveStack = function()
     assertEquals(interB2.getColor(), colorA3);
     assertEquals(interB3.getStackHeight(), 0);
 };
+
+LyngkTestCase.prototype.testMoveStackEmptyIntersection = function()
+{
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var interA3 = engine.getIntersection("A3");
+    var interB3 = engine.getIntersection("B3");
+    var interB2 = engine.getIntersection("B2");
+
+    var colorA3 = interA3.getColor();
+
+    engine.move(interA3, interB3);
+    engine.move(interB3, interB2);
+
+    var l = interB2.getStackHeight();
+    engine.move(interB2, interB3);
+
+    assertEquals(interB3.getStackHeight(), 0);
+    assertEquals(interB2.getStackHeight(), l);
+};
