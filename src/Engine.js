@@ -36,11 +36,14 @@ Lyngk.Engine = function () {
     };
 
     this.move = function (inter1, inter2) {
-        var pieces = inter1.takePieces();
-
-        for (var i = 0; i < pieces.length; i++)
+        if (inter2.getStackHeight() > 0)
         {
-            inter2.setPiece(pieces[i]);
+            var pieces = inter1.takePieces();
+
+            for (var i = 0; i < pieces.length; i++)
+            {
+                inter2.setPiece(pieces[i]);
+            }
         }
     };
 
