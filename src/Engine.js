@@ -36,8 +36,6 @@ Lyngk.Engine = function () {
     };
 
     this.move = function (inter1, inter2) {
-
-
         if (validMove(inter1, inter2))
         {
             var pieces = inter1.takePieces();
@@ -51,7 +49,10 @@ Lyngk.Engine = function () {
 
     var validMove = function(inter1, inter2)
     {
-        if (inter2.getStackHeight() === 0)
+        var inter1Height = inter1.getStackHeight();
+        var inter2Height = inter2.getStackHeight();
+
+        if (inter2Height === 0 || inter2Height >= 5 || inter1Height >=5)
             return false;
 
         var c1 = inter1.getCoordinate();
