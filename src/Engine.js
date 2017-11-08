@@ -5,11 +5,12 @@ Lyngk.Color = {BLACK: 0, IVORY: 1, BLUE: 2, RED: 3, GREEN: 4, WHITE: 5};
 Lyngk.Players = {PLAYER1: 0, PLAYER2:1 };
 
 Lyngk.Engine = function () {
-    var intersections = [];
+    var intersections;
     var currentPlayer;
 
     var init = function(){
         var letters = "ABCDEFGHI";
+        intersections = [];
         currentPlayer = Lyngk.Players.PLAYER1;
 
         for (var i = 0; i < letters.length; i++)
@@ -85,20 +86,20 @@ Lyngk.Engine = function () {
         var cDiff = c1.getColumn().charCodeAt(0) - c2.getColumn().charCodeAt(0);
 
 
-        if(cDiff === 0 && Math.abs(lDiff) === 1 )
+        if((cDiff === 0 && Math.abs(lDiff) === 1) || (cDiff === -1 && (lDiff === 0 || lDiff === -1)) || (cDiff === 1 && (lDiff === 0 || lDiff === 1)))
         {
-            return true;
-        }
-        else if(cDiff === -1 && (lDiff === 0 || lDiff === -1))
-        {
-            return true;
-        }
-        else if(cDiff === 1 && (lDiff === 0 || lDiff === 1))
-        {
+            currentPlayer = (currentPlayer + 1) % 2;
             return true;
         }
 
         return false;
+    };
+
+    this.initWhite = function () {
+        for (var i = 0; i < intersections.length; i++)
+        {
+            intersections[i].setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+        }
     };
 
     this.initStart = function(){
