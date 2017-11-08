@@ -5,16 +5,20 @@ Lyngk.Color = {BLACK: 0, IVORY: 1, BLUE: 2, RED: 3, GREEN: 4, WHITE: 5};
 Lyngk.Players = {PLAYER1: 0, PLAYER2:1 };
 
 Lyngk.Engine = function () {
-    var intersections;
-    var currentPlayer;
-    var claimedColorsP1;
-    var claimedColorsP2;
+    var intersections = [];
+    var currentPlayer = [];
+    var scorePlayers = [];
+    var claimedColorsP1 = [];
+    var claimedColorsP2 = [];
 
     var init = function(){
         var letters = "ABCDEFGHI";
         intersections = [];
         claimedColorsP1 = [];
         claimedColorsP2 = [];
+        scorePlayers = [];
+        scorePlayers[0] = 0;
+        scorePlayers[1] = 0;
 
         currentPlayer = Lyngk.Players.PLAYER1;
 
@@ -34,10 +38,22 @@ Lyngk.Engine = function () {
         return currentPlayer;
     };
 
-
-
     this.getIntersections = function () {
         return intersections;
+    };
+
+    this.getNbPieces = function () {
+        var nb = 0;
+        for(var i = 0; i < intersections.length; i++)
+        {
+            nb += intersections[i].getStackHeight();
+        }
+
+        return nb;
+    };
+
+    this.getScore = function (p) {
+        return scorePlayers[p];
     };
 
     this.getIntersection = function (c) {
@@ -73,6 +89,14 @@ Lyngk.Engine = function () {
             {
                 inter2.setPiece(pieces[i]);
             }
+
+            if ((inter2.getState() === Lyngk.State.FULL_STACK)  && (this.getClaimedColors(currentPlayer).indexOf(inter2.getColor()) >= 0))
+            {
+                scorePlayers[currentPlayer]++;
+                inter2.takePieces();
+            }
+
+            currentPlayer = (currentPlayer + 1) % 2;
         }
     };
 
@@ -109,7 +133,6 @@ Lyngk.Engine = function () {
 
         if((cDiff === 0 && Math.abs(lDiff) === 1) || (cDiff === -1 && (lDiff === 0 || lDiff === -1)) || (cDiff === 1 && (lDiff === 0 || lDiff === 1)))
         {
-            currentPlayer = (currentPlayer + 1) % 2;
             return true;
         }
 
