@@ -354,3 +354,10 @@ LyngkTestCase.prototype.testColors = function()
 
     assertFalse(interG8.getStackHeight() === 5);
 };
+
+LyngkTestCase.prototype.testStartPlayerOne = function()
+{
+    var engine = new Lyngk.Engine();
+
+    assertEquals(engine.getCurrentPlayer(), Lyngk.Players.PLAYER1);
+};
