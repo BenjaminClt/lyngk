@@ -404,6 +404,21 @@ LyngkTestCase.prototype.testOnePoint = function() {
     engine.move(interG6, interH7);
     engine.move(interC2, interD2);
 
-    assertEquals(engine.getNbPieces(), 38);
     assertEquals(engine.getScore(Lyngk.Players.PLAYER1), 1);
+    assertEquals(engine.getNbPieces(), 38);
+};
+
+LyngkTestCase.prototype.testMoveClaimedColor = function() {
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var interB5 = engine.getIntersection("B5");
+    var interB4 = engine.getIntersection("B4");
+    var interA3 = engine.getIntersection("A3");
+
+    engine.claim(Lyngk.Color.RED);
+    engine.move(interB5, interB4);
+    engine.move(interA3, interB4);
+
+    assertEquals(interB4, 2);
 };
