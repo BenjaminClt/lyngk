@@ -322,3 +322,22 @@ LyngkTestCase.prototype.testSuppMove = function()
     assertEquals(interH6.getStackHeight(), 2);
     assertEquals(interG6.getStackHeight(), 3);
 };
+
+LyngkTestCase.prototype.testColors = function()
+{
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var interG4 = engine.getIntersection("G4");
+    var interG5 = engine.getIntersection("G5");
+    var interG6 = engine.getIntersection("G6");
+    var interG7 = engine.getIntersection("G7");
+    var interG8 = engine.getIntersection("G8");
+
+    engine.move(interG4, interG5);
+    engine.move(interG5, interG6);
+    engine.move(interG6, interG7);
+    engine.move(interG7, interG8);
+
+    assertFalse(interG8.getStackHeight() === 5);
+};
