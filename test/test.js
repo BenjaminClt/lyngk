@@ -285,7 +285,7 @@ LyngkTestCase.prototype.testStackHeightMove = function()
     assertEquals(interF3.getStackHeight(), 1);
 };
 
-LyngkTestCase.prototype.testOnePiecetMove = function()
+LyngkTestCase.prototype.testOnePieceMove = function()
 {
     var engine = new Lyngk.Engine();
     engine.initStart();
@@ -298,4 +298,27 @@ LyngkTestCase.prototype.testOnePiecetMove = function()
     engine.move(interC3, interB3);
 
     assertEquals(interB3.getStackHeight(), 2);
+};
+
+LyngkTestCase.prototype.testSuppMove = function()
+{
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var interI7 = engine.getIntersection("I7");
+    var interH6 = engine.getIntersection("H6");
+
+    var interG4 = engine.getIntersection("G4");
+    var interG5 = engine.getIntersection("G5");
+    var interG6 = engine.getIntersection("G6");
+
+    engine.move(interI7, interH6);
+
+    engine.move(interG4, interG5);
+    engine.move(interG5, interG6);
+
+    engine.move(interH6, interG6);
+
+    assertEquals(interH6.getStackHeight(), 2);
+    assertEquals(interG6.getStackHeight(), 3);
 };
