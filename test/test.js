@@ -188,7 +188,7 @@ LyngkTestCase.prototype.testMovePiece = function()
 LyngkTestCase.prototype.testMoveStack = function()
 {
     var engine = new Lyngk.Engine();
-    engine.initStart();
+    engine.initWhite();
 
     var interA3 = engine.getIntersection("A3");
     var interB3 = engine.getIntersection("B3");
@@ -206,7 +206,7 @@ LyngkTestCase.prototype.testMoveStack = function()
 LyngkTestCase.prototype.testMoveStackEmptyIntersection = function()
 {
     var engine = new Lyngk.Engine();
-    engine.initStart();
+    engine.initWhite();
 
     var interA3 = engine.getIntersection("A3");
     var interB3 = engine.getIntersection("B3");
@@ -225,7 +225,7 @@ LyngkTestCase.prototype.testMoveStackEmptyIntersection = function()
 LyngkTestCase.prototype.testMove = function()
 {
     var engine = new Lyngk.Engine();
-    engine.initStart();
+    engine.initWhite();
 
     var interB2 = engine.getIntersection("B2");
     var interB3 = engine.getIntersection("B3");
@@ -242,7 +242,7 @@ LyngkTestCase.prototype.testMove = function()
 LyngkTestCase.prototype.testMoveOne = function()
 {
     var engine = new Lyngk.Engine();
-    engine.initStart();
+    engine.initWhite();
 
     var interI7 = engine.getIntersection("I7");
     var interH5 = engine.getIntersection("H5");
@@ -266,6 +266,7 @@ LyngkTestCase.prototype.testMoveOne = function()
 LyngkTestCase.prototype.testStackHeightMove = function()
 {
     var engine = new Lyngk.Engine();
+    engine.initWhite();
 
     var interA3 = engine.getIntersection("A3");
     var interB3 = engine.getIntersection("B3");
@@ -273,14 +274,6 @@ LyngkTestCase.prototype.testStackHeightMove = function()
     var interD3 = engine.getIntersection("D3");
     var interE3 = engine.getIntersection("E3");
     var interF3 = engine.getIntersection("F3");
-
-    // Initialize color intersection
-    interA3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-    interB3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-    interC3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-    interD3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-    interE3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-    interF3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
 
     engine.move(interA3, interB3);
     engine.move(interB3, interC3);
@@ -295,7 +288,7 @@ LyngkTestCase.prototype.testStackHeightMove = function()
 LyngkTestCase.prototype.testOnePieceMove = function()
 {
     var engine = new Lyngk.Engine();
-    engine.initStart();
+    engine.initWhite();
 
     var interA3 = engine.getIntersection("A3");
     var interB3 = engine.getIntersection("B3");
@@ -310,6 +303,7 @@ LyngkTestCase.prototype.testOnePieceMove = function()
 LyngkTestCase.prototype.testSuppMove = function()
 {
     var engine = new Lyngk.Engine();
+    engine.initWhite();
 
     var interI7 = engine.getIntersection("I7");
     var interH6 = engine.getIntersection("H6");
@@ -317,13 +311,6 @@ LyngkTestCase.prototype.testSuppMove = function()
     var interG4 = engine.getIntersection("G4");
     var interG5 = engine.getIntersection("G5");
     var interG6 = engine.getIntersection("G6");
-
-    // Initialize color intersection
-    interI7.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-    interH6.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-    interG4.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-    interG5.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
-    interG6.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
 
     engine.move(interI7, interH6);
 
@@ -373,4 +360,23 @@ LyngkTestCase.prototype.testCurrentPlayer = function()
     engine.move(interG4, interG5);
 
     assertEquals(engine.getCurrentPlayer(), Lyngk.Players.PLAYER2);
+};
+
+LyngkTestCase.prototype.testClaimedColor = function()
+{
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var interA3 = engine.getIntersection("A3");
+    var interB3 = engine.getIntersection("B3");
+
+    engine.claim(Lyngk.Color.RED);
+    engine.move(interA3, interB3);
+    engine.claim(Lyngk.Color.GREEN);
+
+    var claimedColorsP1 = engine.getClaimedColors(Lyngk.Players.PLAYER1);
+    var claimedColorsP2 = engine.getClaimedColors(Lyngk.Players.PLAYER2);
+
+    assertEquals(claimedColorsP1[0], Lyngk.Color.RED);
+    assertEquals(claimedColorsP2[0], Lyngk.Color.GREEN);
 };
