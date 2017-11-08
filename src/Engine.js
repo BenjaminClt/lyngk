@@ -7,10 +7,15 @@ Lyngk.Players = {PLAYER1: 0, PLAYER2:1 };
 Lyngk.Engine = function () {
     var intersections;
     var currentPlayer;
+    var claimedColorsP1;
+    var claimedColorsP2;
 
     var init = function(){
         var letters = "ABCDEFGHI";
         intersections = [];
+        claimedColorsP1 = [];
+        claimedColorsP2 = [];
+
         currentPlayer = Lyngk.Players.PLAYER1;
 
         for (var i = 0; i < letters.length; i++)
@@ -29,6 +34,8 @@ Lyngk.Engine = function () {
         return currentPlayer;
     };
 
+
+
     this.getIntersections = function () {
         return intersections;
     };
@@ -41,6 +48,20 @@ Lyngk.Engine = function () {
         }
 
         return null;
+    };
+
+    this.claim = function (c) {
+        if (currentPlayer === Lyngk.Players.PLAYER1)
+            claimedColorsP1.push(c);
+        else
+            claimedColorsP2.push(c);
+    };
+
+    this.getClaimedColors = function (p) {
+        if (p === Lyngk.Players.PLAYER1)
+            return claimedColorsP1;
+
+        return claimedColorsP2;
     };
 
     this.move = function (inter1, inter2) {
