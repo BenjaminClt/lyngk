@@ -361,3 +361,16 @@ LyngkTestCase.prototype.testStartPlayerOne = function()
 
     assertEquals(engine.getCurrentPlayer(), Lyngk.Players.PLAYER1);
 };
+
+LyngkTestCase.prototype.testCurrentPlayer = function()
+{
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var interG4 = engine.getIntersection("G4");
+    var interG5 = engine.getIntersection("G5");
+
+    engine.move(interG4, interG5);
+
+    assertEquals(engine.getCurrentPlayer(), Lyngk.Players.PLAYER2);
+};
