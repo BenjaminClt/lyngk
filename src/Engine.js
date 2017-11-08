@@ -114,6 +114,15 @@ Lyngk.Engine = function () {
         if (inter1.getState() === Lyngk.State.ONE_PIECE && inter2.getState() === Lyngk.State.STACK)
             return false;
 
+        if(currentPlayer === Lyngk.Players.PLAYER1 && claimedColorsP2.indexOf(inter1.getColor()) >= 0)
+        {
+            return false;
+        }
+        else if (currentPlayer === Lyngk.Players.PLAYER2 && claimedColorsP1.indexOf(inter1.getColor()) >= 0)
+        {
+            return false;
+        }
+
         var inter1Pieces = inter1.getPieces();
         for (var i = 0; i < inter1.getStackHeight(); i++)
         {
