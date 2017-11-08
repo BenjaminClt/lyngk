@@ -380,3 +380,30 @@ LyngkTestCase.prototype.testClaimedColor = function()
     assertEquals(claimedColorsP1[0], Lyngk.Color.RED);
     assertEquals(claimedColorsP2[0], Lyngk.Color.GREEN);
 };
+
+LyngkTestCase.prototype.testOnePoint = function() {
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var interA3 = engine.getIntersection("A3");
+    var interB3 = engine.getIntersection("B3");
+    var interH6 = engine.getIntersection("H6");
+    var interH7 = engine.getIntersection("H7");
+    var interG5 = engine.getIntersection("G5");
+    var interG6 = engine.getIntersection("G6");
+    var interC3 = engine.getIntersection("C3");
+    var interC2 = engine.getIntersection("C2");
+    var interD2 = engine.getIntersection("D2");
+
+    engine.claim(Lyngk.Color.BLUE);
+    engine.move(interA3, interB3);
+    engine.move(interH6, interG5);
+    engine.move(interB3, interC3);
+    engine.move(interG5, interG6);
+    engine.move(interC3, interC2);
+    engine.move(interG6, interH7);
+    engine.move(interC2, interD2);
+
+    assertEquals(engine.getNbPieces(), 38);
+    assertEquals(engine.getScore(Lyngk.Players.PLAYER1), 1);
+};
