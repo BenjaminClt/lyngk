@@ -36,7 +36,9 @@ Lyngk.Engine = function () {
     };
 
     this.move = function (inter1, inter2) {
-        if (inter2.getStackHeight() > 0)
+
+
+        if (validMove(inter1, inter2))
         {
             var pieces = inter1.takePieces();
 
@@ -47,21 +49,47 @@ Lyngk.Engine = function () {
         }
     };
 
-    this.initStart = function(){
+    var validMove = function(inter1, inter2)
+    {
+        if (inter2.getStackHeight() === 0)
+            return false;
 
-        for (var i = 0; i < 43; i++)
+        var c1 = inter1.getCoordinate();
+        var c2 = inter2.getCoordinate();
+
+        var lDiff = c1.getLine() - c2.getLine();
+        var cDiff = c1.getColumn().charCodeAt(0) - c2.getColumn().charCodeAt(0);
+
+        var valid = false;
+
+        if(cDiff === 0 && Math.abs(lDiff) === 1 )
         {
-            var countColors1 = [8,8,8,8,8,3];
-            for (var i = 0; i < 43; i++) {
+            valid = true;
+        }
+        else if(cDiff === -1 && (lDiff === 0 || lDiff === -1))
+        {
+            valid = true;
+        }
+        else if(cDiff === 1 && (lDiff === 0 || lDiff === 1))
+        {
+            valid = true;
+        }
 
-                var randomColor;
-                do{
-                    randomColor = Math.floor(Math.random() * 6);
-                }while(countColors1[randomColor] <= 0)
-                countColors1[randomColor]--;
+        return valid;
+    };
 
-                intersections[i].setPiece(new Lyngk.Piece(randomColor));
-            }
+    this.initStart = function(){
+        var colors = [8,8,8,8,8,3];
+
+        for (var i = 0; i < intersections.length; i++) {
+            var color;
+
+            do{
+                color = Math.floor(Math.random() * 6);
+            }while(colors[color] <= 0);
+
+            colors[color]--;
+            intersections[i].setPiece(new Lyngk.Piece(color));
         }
     };
 
