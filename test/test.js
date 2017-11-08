@@ -238,3 +238,27 @@ LyngkTestCase.prototype.testMove = function()
 
     assertEquals(interB3.getStackHeight(), l);
 };
+
+LyngkTestCase.prototype.testMoveOne = function()
+{
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var interI7 = engine.getIntersection("I7");
+    var interH5 = engine.getIntersection("H5");
+    var interH6 = engine.getIntersection("H6");
+    var interH8 = engine.getIntersection("H8");
+    var interF3 = engine.getIntersection("F3");
+    var interF5 = engine.getIntersection("F5");
+
+    engine.move(interI7, interH6);
+    engine.move(interH6, interH5);
+
+    var l = interH5.getStackHeight();
+
+    engine.move(interH5, interH8);
+    engine.move(interH5, interF5);
+    engine.move(interH5, interF3);
+
+    assertEquals(interH5.getStackHeight(), l);
+};
