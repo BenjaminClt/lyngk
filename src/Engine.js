@@ -52,7 +52,7 @@ Lyngk.Engine = function () {
         var inter1Height = inter1.getStackHeight();
         var inter2Height = inter2.getStackHeight();
 
-        if (inter2Height === 0)
+        if (inter2Height === 0 || inter2Height > inter1Height)
             return false;
 
         if (inter1.getState() === Lyngk.State.FULL_STACK || inter2.getState() === Lyngk.State.FULL_STACK)
