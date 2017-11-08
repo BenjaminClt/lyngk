@@ -266,7 +266,6 @@ LyngkTestCase.prototype.testMoveOne = function()
 LyngkTestCase.prototype.testStackHeightMove = function()
 {
     var engine = new Lyngk.Engine();
-    engine.initStart();
 
     var interA3 = engine.getIntersection("A3");
     var interB3 = engine.getIntersection("B3");
@@ -274,6 +273,14 @@ LyngkTestCase.prototype.testStackHeightMove = function()
     var interD3 = engine.getIntersection("D3");
     var interE3 = engine.getIntersection("E3");
     var interF3 = engine.getIntersection("F3");
+
+    // Initialize color intersection
+    interA3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+    interB3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+    interC3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+    interD3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+    interE3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+    interF3.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
 
     engine.move(interA3, interB3);
     engine.move(interB3, interC3);
@@ -303,7 +310,6 @@ LyngkTestCase.prototype.testOnePieceMove = function()
 LyngkTestCase.prototype.testSuppMove = function()
 {
     var engine = new Lyngk.Engine();
-    engine.initStart();
 
     var interI7 = engine.getIntersection("I7");
     var interH6 = engine.getIntersection("H6");
@@ -311,6 +317,13 @@ LyngkTestCase.prototype.testSuppMove = function()
     var interG4 = engine.getIntersection("G4");
     var interG5 = engine.getIntersection("G5");
     var interG6 = engine.getIntersection("G6");
+
+    // Initialize color intersection
+    interI7.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+    interH6.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+    interG4.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+    interG5.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
+    interG6.setPiece(new Lyngk.Piece(Lyngk.Color.WHITE));
 
     engine.move(interI7, interH6);
 
