@@ -284,3 +284,18 @@ LyngkTestCase.prototype.testStackHeightMove = function()
     assertEquals(interE3.getStackHeight(), 5);
     assertEquals(interF3.getStackHeight(), 1);
 };
+
+LyngkTestCase.prototype.testOnePiecetMove = function()
+{
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var interA3 = engine.getIntersection("A3");
+    var interB3 = engine.getIntersection("B3");
+    var interC3 = engine.getIntersection("C3");
+
+    engine.move(interA3, interB3);
+    engine.move(interC3, interB3);
+
+    assertEquals(interB3.getStackHeight(), 2);
+};

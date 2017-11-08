@@ -61,22 +61,21 @@ Lyngk.Engine = function () {
         var lDiff = c1.getLine() - c2.getLine();
         var cDiff = c1.getColumn().charCodeAt(0) - c2.getColumn().charCodeAt(0);
 
-        var valid = false;
 
         if(cDiff === 0 && Math.abs(lDiff) === 1 )
         {
-            valid = true;
+            return true;
         }
         else if(cDiff === -1 && (lDiff === 0 || lDiff === -1))
         {
-            valid = true;
+            return true;
         }
         else if(cDiff === 1 && (lDiff === 0 || lDiff === 1))
         {
-            valid = true;
+            return true;
         }
 
-        return valid;
+        return false;
     };
 
     this.initStart = function(){
