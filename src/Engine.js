@@ -2,12 +2,15 @@
 
 // enums definition
 Lyngk.Color = {BLACK: 0, IVORY: 1, BLUE: 2, RED: 3, GREEN: 4, WHITE: 5};
+Lyngk.Players = {PLAYER1: 0, PLAYER2:1 };
 
 Lyngk.Engine = function () {
     var intersections = [];
+    var currentPlayer;
 
     var init = function(){
         var letters = "ABCDEFGHI";
+        currentPlayer = Lyngk.Players.PLAYER1;
 
         for (var i = 0; i < letters.length; i++)
         {
@@ -19,6 +22,10 @@ Lyngk.Engine = function () {
                     intersections.push(new Lyngk.Intersection(coord));
             }
         }
+    };
+
+    this.getCurrentPlayer = function () {
+        return currentPlayer;
     };
 
     this.getIntersections = function () {
@@ -49,10 +56,10 @@ Lyngk.Engine = function () {
 
     var validMove = function(inter1, inter2)
     {
-        var inter1Height = inter1.getStackHeight();
-        var inter2Height = inter2.getStackHeight();
+        if (inter2.getState() === Lyngk.State.VACANT)
+            return false;
 
-        if (inter2Height === 0 || inter2Height > inter1Height)
+        if (inter2.getStackHeight() > inter1.getStackHeight())
             return false;
 
         if (inter1.getState() === Lyngk.State.FULL_STACK || inter2.getState() === Lyngk.State.FULL_STACK)
@@ -60,6 +67,16 @@ Lyngk.Engine = function () {
 
         if (inter1.getState() === Lyngk.State.ONE_PIECE && inter2.getState() === Lyngk.State.STACK)
             return false;
+
+        var inter1Pieces = inter1.getPieces();
+        for (var i = 0; i < inter1.getStackHeight(); i++)
+        {
+            var color = inter1Pieces[i].getColor();
+            if (color !== Lyngk.Color.WHITE && inter2.containsColor(color))
+            {
+                return false;
+            }
+        }
 
         var c1 = inter1.getCoordinate();
         var c2 = inter2.getCoordinate();

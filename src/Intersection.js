@@ -15,9 +15,9 @@ Lyngk.Intersection = function (c) {
         var tmpPieces = pieces;
         pieces = [];
 
-        return tmpPieces;
+        state = Lyngk.State.VACANT;
 
-        return null;
+        return tmpPieces;
     };
 
     this.getCoordinate = function () {
@@ -36,6 +36,20 @@ Lyngk.Intersection = function (c) {
             state = Lyngk.State.FULL_STACK;
         else
             state = Lyngk.State.STACK;
+    };
+
+    this.getPieces = function () {
+        return pieces;
+    };
+
+    this.containsColor = function(c){
+        for (var i = 0; i < pieces.length; i++)
+        {
+            if (pieces[i].getColor() === c)
+                return true;
+        }
+
+        return false;
     };
 
     this.getColor = function(){
