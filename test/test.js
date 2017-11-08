@@ -422,3 +422,12 @@ LyngkTestCase.prototype.testMoveClaimedColor = function() {
 
     assertEquals(interB4, 2);
 };
+
+LyngkTestCase.prototype.testMoveNoClaim = function() {
+    var engine = new Lyngk.Engine();
+    engine.initStart();
+
+    var movablePieces = engine.getMovablePieces(Lyngk.Players.PLAYER1);
+
+    assertEquals(movablePieces, 40);
+};
